@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.repository.StudentRepository;
+import net.javaguides.sms.entity.Gender;
 
 @SpringBootApplication
 public class StudentManagementSystemApplication implements CommandLineRunner{
@@ -20,6 +21,10 @@ public class StudentManagementSystemApplication implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
+
+		
+		 Student student1 = new Student("Ramesh", "Fadatare", "ramesh@gmail.com", Gender.MALE);
+		 studentRepository.save(student1);
 		
 		/*
 		 * Student student1 = new Student("Ramesh", "Fadatare", "ramesh@gmail.com");
