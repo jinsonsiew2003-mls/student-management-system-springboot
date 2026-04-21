@@ -1,6 +1,13 @@
 package net.javaguides.sms.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "students")
@@ -22,16 +29,21 @@ public class Student {
 	@Column(name = "grade")
 	private Double grade;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "gender")
+	private Gender gender;
+
 	public Student() {
 		
 	}
 	
-	public Student(String firstName, String lastName, String email, Double grade) {
+	public Student(String firstName, String lastName, String email, Double grade, Gender gender) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.grade = grade;
+		this.gender = gender;
 	}
 
 	public Long getId() {
@@ -72,5 +84,13 @@ public class Student {
 	
 	public void setGrade(Double grade) {
 		this.grade = grade;
+	}
+	
+	public Gender getGender() {
+		return gender;
+	}
+	
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 }
