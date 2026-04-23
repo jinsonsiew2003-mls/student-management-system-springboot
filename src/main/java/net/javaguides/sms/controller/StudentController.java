@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.service.StudentService;
@@ -113,8 +112,8 @@ public class StudentController {
 	// update course
 	@PutMapping("/api/courses/{id}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> updateCourse(@PathVariable Long id,
-															@RequestBody Map<String, Object> course) {
+	public ResponseEntity<Map<String, Object>> updateCourse(@PathVariable Long id,	
+	@RequestBody Map<String, Object> course) {
 		if (courseStorage.containsKey(id)) {
 			course.put("id", id);
 			courseStorage.put(id, course);
