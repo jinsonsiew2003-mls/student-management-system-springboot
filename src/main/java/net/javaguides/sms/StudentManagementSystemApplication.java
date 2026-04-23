@@ -5,9 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import net.javaguides.sms.entity.Gender;
 import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.repository.StudentRepository;
-import net.javaguides.sms.entity.Gender;
 
 @SpringBootApplication
 public class StudentManagementSystemApplication implements CommandLineRunner{
