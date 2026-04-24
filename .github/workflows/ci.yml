@@ -29,6 +29,9 @@ jobs:
       - name: Run docker-compose
         run: docker compose up -d --build
         
+      - name: Wait for app
+        run: sleep 25
+        
       - name: Show container logs
         run: docker compose logs
 
