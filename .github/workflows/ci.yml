@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code
@@ -24,10 +25,30 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean verify
+        run: mvn -B clean verify
 
       - name: Run docker-compose
         run: docker compose up -d --build
 
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            docker compose exec -T db mysqladmin ping -h localhost -u root -proot && break || sleep 2
+          done
+        
+      - name: Wait for app
+        run: |
+          for i in {1..60}; do
+            curl -f http://localhost:8080/actuator/health && break || sleep 2
+          done
+        
+      - name: Show container logs
+        if: always()
+        run: docker compose logs
+
       - name: Check service
-        run: curl -f http://localhost:8080
+        run: curl -fL http://localhost:8080
+
+      - name: Tear down containers
+        if: always()
+        run: docker compose down -v
