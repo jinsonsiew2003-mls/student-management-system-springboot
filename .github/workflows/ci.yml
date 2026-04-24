@@ -27,7 +27,7 @@ jobs:
         run: mvn clean verify
 
       - name: Run docker-compose
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
       - name: Check service
         run: curl -f http://localhost:8080
